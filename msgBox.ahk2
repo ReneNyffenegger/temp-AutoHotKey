@@ -1,0 +1,10 @@
+msgBox  no paranthesis no quotes   ; msgBox, but no text
+msgBox "no paranthesis    quotes"
+msgBox(    paranthesis no quotes ) ; msgBox, but no text
+msgBox("   paranthesis    quotes")
+
+var       := "some text"
+nameOfVar := "var"
+
+msgBox( var       ) ; some text
+msgBox(%nameOfVar%) ; some text
