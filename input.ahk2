@@ -1,0 +1,14 @@
+;
+;             L5     : max length
+;                T3  : timeout
+;
+txt := input("L5 T3", "{enter}")
+
+
+;
+; possible Values for errorLevel:
+;    Max
+;    Timeout
+;    EndKey:Enter
+;
+msgBox "txt = " txt ", errorLevel = " errorLevel
