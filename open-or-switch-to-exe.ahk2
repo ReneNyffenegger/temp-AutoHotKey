@@ -1,0 +1,24 @@
+
+:*:gtexcel::
+; msgBox "hot string"
+; IfWinExist     ahk_exe excel.exe
+if (pid_excel := processExist("excel.exe"))
+{
+  msgBox "excel found, pid_excel = " pid_excel
+	winActivate("ahk_pid " pid_excel)
+
+}
+else {
+  msgBox "excel not found found, starting"
+;	run, "C:\Users\xxx\AppData\Local\Google\Chrome\Application\chrome.exe"
+  run  "C:\Program Files (x86)\Microsoft Office\Office15\excel.exe"
+; msgBox "excel not found found, started"
+  WinWait    ("ahk_exe excel.exe")
+; WinActivate    ahk_exe excel.exe
+  WinActivate("ahk_exe excel.exe")
+; WinWaitActive  ahk_exe excel.exe
+
+}
+
+
+return
