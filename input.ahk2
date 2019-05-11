@@ -11,4 +11,4 @@ txt := input("L5 T3", "{enter}")
 ;    Timeout
 ;    EndKey:Enter
 ;
-msgBox "txt = " txt ", errorLevel = " errorLevel
+msgBox("txt = " txt ", errorLevel = " errorLevel)
