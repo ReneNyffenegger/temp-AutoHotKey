@@ -1,0 +1,15 @@
+num:=42
+txt:="The answer is %num%"
+
+msgBox txt         ; The message box shows «txt»
+msgBox %txt%       ; The message box shows the content of the variable txt: «The answer is 42»
+msgBox(txt)        ; The message box shows the content of the variable txt: «The answer is 42»
+
+varValue := txt    ; Assign value of variable txt to another variable
+varName  :="txt"   ; Assign literal string to a variable
+
+msgBox(varValue )  ; The message Box shows the value of varValue: «The answer is 42»
+msgBox(varName  )  ; The message box shows the value of varName : «txt»
+msgBox(%varName%)  ; The message box shows the value of the variable txt: «The answer is 42»
+
+;msgBox(%txt%) ; Using percents within the paranthesis of msgBox causes an derror

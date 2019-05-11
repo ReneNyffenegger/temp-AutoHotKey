@@ -1,0 +1,1 @@
+msgBox(envGet("USERPROFILE")) ; Show the user's home directory

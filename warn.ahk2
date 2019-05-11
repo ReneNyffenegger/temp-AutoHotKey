@@ -1,0 +1,6 @@
+#warn
+
+initializedVariable := "some text"
+
+msgBox(initializedVariable  )
+msgBox(uninitializedVariable) ; Warning: This variable has not been assigned a value

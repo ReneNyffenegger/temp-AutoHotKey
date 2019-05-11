@@ -1,0 +1,18 @@
+
+num_1 := 10
+num_2 := 32
+
+if num_1 + num_2 = 42
+   msgBox("num_1 + num_2 = 42")
+else
+   msgBox("num_1 + num_2 ≠ 42")
+
+
+if false {
+   msgBox("true statement 1")
+   msgBox("true statement 2")
+}
+else {
+   msgBox("false statement 1")
+   msgBox("false statement 2")
+}
