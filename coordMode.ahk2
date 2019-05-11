@@ -1,0 +1,9 @@
+coordMode Mouse, relative
+
+mouseGetPos mouseX, mouseY
+msgBox mouse position relative to active window - X: %mouseX%, Y: %mouseY%
+
+coordMode Mouse, Screen
+
+mouseGetPos mouseX, mouseY
+msgBox mouse position relative to screen - X: %mouseX%, Y: %mouseY%

@@ -1,0 +1,6 @@
+;
+;  Don't show the tray icon:
+;
+#noTrayIcon
+
+msgBox("do you see a tray icon, the value of a_iconHidden is: " a_iconHidden)

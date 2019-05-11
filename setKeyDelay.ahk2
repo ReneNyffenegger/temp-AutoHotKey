@@ -1,0 +1,2 @@
+setKeyDelay  100, 100
+send         some text

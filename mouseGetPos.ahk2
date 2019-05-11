@@ -1,0 +1,7 @@
+msgBox Move the mouse over a control.
+
+sleep 2000
+
+mouseGetPos mouseX, mouseY, winID, classControl, 0
+
+msgBox pos: %mouseX%/%mouseY%, winID: %winID%, classControl: %classControl%

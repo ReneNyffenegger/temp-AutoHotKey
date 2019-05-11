@@ -1,0 +1,3 @@
+#singleInstance force
+
+#a::msgBox foo
