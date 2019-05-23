@@ -1,0 +1,18 @@
+g := guiCreate()
+
+g.addText(''    , 'Enter some text: ') ; First parameter is options.
+g.addEdit('vTxt'                     ) ; Note the v that apparently indicates the name to later retrieve the value entered.
+
+b := g.addButton('default', 'Go')
+b.onEvent('click', () => clicked(g))
+
+g.show()
+
+clicked(this) {
+
+  bla := this.submit()
+
+  msgBox('txt = ' . bla.txt)
+  this.destroy()
+
+}
