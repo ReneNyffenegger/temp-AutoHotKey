@@ -12,4 +12,4 @@ msgBox(varValue )  ; The message Box shows the value of varValue: «The answer i
 msgBox(varName  )  ; The message box shows the value of varName : «txt»
 msgBox(%varName%)  ; The message box shows the value of the variable txt: «The answer is 42»
 
-;msgBox(%txt%) ; Using percents within the paranthesis of msgBox causes an derror
+;msgBox(%txt%) ; Using percents within the paranthesis of msgBox causes an error
