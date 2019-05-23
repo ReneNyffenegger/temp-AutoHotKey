@@ -1,9 +1,6 @@
 ;LabelControl.ahk
 ; Overlays controls with a Number for direct access via Ctrl-Number
 ;Skrommel @2006
-;
-;  http://www.dcmembers.com/skrommel/download/labelcontrol/
-;
 
 #SingleInstance,Force
 #Persistent
@@ -30,10 +27,25 @@ If down=1
 down=1
 
 ;----- Create window for the overlays
+; msgBox "guiid " %guiid%
 WinMove,ahk_id %guiid%,,0,0,0,0
 Gui,Destroy
+
+;
+;  Get the id of the active (»A«) window, store it in
+;  the variable winid:
+;
 WinGet,winid,ID,A
+
+; msgBox "winid " %winid%
+
+;
+; Get position, and size of active window, and
+; store in win… variables:
+;
 WinGetPos,winx,winy,winw,winh,ahk_id %winid%
+; msgBox "winx=" %winx% ", winy=" %winy% ", winw=" %winw% ", winh=" %winh%
+
 Gui,-Caption +Border +ToolWindow +AlwaysOnTop
 Gui,Color,EEEEEE
 Gui,Margin,0,0
