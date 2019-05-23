@@ -2,39 +2,21 @@
 
 officeRootDir := "C:\Program Files (x86)\Microsoft Office\Office15\"
 
-
 openOrSwitchToExe(path, exeName)
 {
-;  if (pid_excel := processExist("excel.exe"))
-   if (pid_excel := processExist( exeName   ))
+   if (pid       := processExist( exeName   ))
    {
-     msgBox "excel found, pid_excel = " pid_excel
-     winActivate("ahk_pid " pid_excel)
+     winActivate("ahk_pid " pid)
    }
    else {
-     msgBox "excel not found found, starting"
-   ;	run, "C:\Users\xxx\AppData\Local\Google\Chrome\Application\chrome.exe"
-;    run  officeRootDir excel.exe"
-;    run  officeRootDir exeName
-     msgBox(%path%%exeName%)
-     run (%path%%exeName%)
-   ; msgBox "excel not found found, started"
-;    WinWait    ("ahk_exe excel.exe")
+     run         (path    . exeName)
      WinWait    ("ahk_exe " exeName)
-   ; WinActivate    ahk_exe excel.exe
-;    WinActivate("ahk_exe excel.exe")
-     WinActivate("ahk_exe " exe)
-   ; WinWaitActive  ahk_exe excel.exe
-   
+     WinActivate("ahk_exe " exeName)
    }
 
 }
 
-; openOrSwitchToExe(officeRootDir, "excel.exe")
-; openOrSwitchToExe("excel.exe")
-
-<!g::
-  msgBox("right alt g")
+RAlt & g::
   gt := input("L10 T3", "{enter}{esc}")
   if (errorLevel = "EndKey:Escape")
   {
@@ -43,14 +25,12 @@ openOrSwitchToExe(path, exeName)
   }
   if (gt = "excel")
   {
-    msgBox "gt = excel"
     openOrSwitchToExe(officeRootDir, "excel.exe")
     return
   }
   if (gt = "word")
   {
-    msgBox "gt = word"
-    openOrSwitchToExe(officeRootDir, "word.exe")
+    openOrSwitchToExe(officeRootDir, "winword.exe")
     return
   }
   msgBox "gt = " gt ", that is, not excel."
