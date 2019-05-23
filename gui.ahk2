@@ -1,4 +1,5 @@
-g := guiCreate()
+g := GuiCreate()
+; g.options("
 
 g.addText(''    , 'Enter some text: ') ; First parameter is options.
 g.addEdit('vTxt'                     ) ; Note the v that apparently indicates the name to later retrieve the value entered.
