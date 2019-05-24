@@ -1,0 +1,3 @@
+[submodule "vim-everywhere"]
+	path = vim-everywhere
+	url = https://github.com/lubokkanev/vim-everywhere
