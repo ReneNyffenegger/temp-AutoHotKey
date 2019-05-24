@@ -32,7 +32,7 @@ WinMove,ahk_id %guiid%,,0,0,0,0
 Gui,Destroy
 
 ;
-;  Get the id of the active (»A«) window, store it in
+;  Get the id (hwnd?) of the active (»A«) window, store it in
 ;  the variable winid:
 ;
 WinGet,winid,ID,A
@@ -50,8 +50,26 @@ Gui,-Caption +Border +ToolWindow +AlwaysOnTop
 Gui,Color,EEEEEE
 Gui,Margin,0,0
 Gui,Show,x0 y0 w0 h0 NoActivate,%applicationname%Gui
+
+;
+;  The the GUI's hwnd and store it in guiid
+;
 WinGet,guiid,ID,%applicationname%Gui
+
+;
+; TransColor makes all pixels with the given
+; color invisible
+;
 WinSet,TransColor,EEEEEE,ahk_id %guiid%
+
+;
+; Resize the GUI window so that overlaps the
+; active window.
+; It seems this could also be achieved with
+; the following one-liner:
+;
+;   WinMove,ahk_id %guiid%,,%winx%,%winy%,%winw%,%winh%
+;
 WinMove,ahk_id %guiid%,,-%winw%,-%winh%,%winw%,%winh% 
 WinMove,ahk_id %guiid%,,%winx%,%winy%
 
