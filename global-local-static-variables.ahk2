@@ -1,0 +1,26 @@
+varOne := 'one'
+varTwo := 'two'
+
+f()
+f()
+
+msgBox (
+   'varOne = ' . varOne .
+ ', varTwo = ' . varTwo
+)
+
+f() {
+
+  static callCnt := 0
+         callCnt += 1
+
+  global varOne
+
+  varOne := 'changed'
+  varTwo := 'changed'
+
+  msgBox ('f: callCnt = ' . callCnt . 
+          ' , varOne = '  . varOne  .
+           ', varTwo = '  . varTwo)
+
+}
