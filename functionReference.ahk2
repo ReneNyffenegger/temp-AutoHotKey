@@ -1,0 +1,12 @@
+saySomething(txt) {
+  msgBox(txt)
+}
+
+funcRef := func('saySomething')
+
+%funcRef%('Calling func ref with %')
+
+funcRef.call('calling func ref with call()')
+
+boundFunc := funcRef.bind('bound parameter')
+%boundFunc%()
