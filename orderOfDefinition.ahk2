@@ -1,0 +1,6 @@
+f()
+
+
+f() {
+  msgBox('f was called')
+}
