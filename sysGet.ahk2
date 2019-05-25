@@ -1,0 +1,12 @@
+;
+;  sysGet() seems to call the Windows API function GetSystemMetrics().
+;
+
+SM_CMONITORS := 80 ; The number of display monitors on a desktop. Counts visible displays only (Compare with EnumDisplayMonitors)
+SM_CXHTHUMB  := 10 ; Pixel-Width of the thumb box in a horizontal scrool bar.
+
+nofMonitors  := sysGet(SM_CMONITORS)
+thumbWidth   := sysGet(SM_CXHTHUMB )
+
+msgBox('nofMonitors: ' . nofMonitors . '`n' .
+       'thumbWidth:  ' . thumbWidth)
