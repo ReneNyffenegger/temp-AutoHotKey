@@ -1,0 +1,19 @@
+someArray   := [42, 'text', 99]
+nestedArray := ['xyz', someArray]
+
+msgBox(type(someArray)) ; Object
+
+iterateOverObject(nestedArray)
+
+iterateOverObject(obj) {
+
+  for ix, val in obj {
+     if (type(val) == 'Object') {
+        iterateOverObject(val)
+     }
+     else {
+       msgBox (ix . ': ' . val)
+     }
+  }
+
+}
