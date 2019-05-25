@@ -1,0 +1,16 @@
+;
+;  Run notepad and store its process
+;  identifier in notepadPid.
+;
+run('notepad.exe',,,notepadPid)
+
+;
+;  Wait until Window with given pid
+;  becomes active
+;
+winWait('ahk_pid ' . notepadPid)
+
+;
+;  Write something into the new window.
+;
+sendInput ('hello world')
