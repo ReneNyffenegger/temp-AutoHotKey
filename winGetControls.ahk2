@@ -1,0 +1,27 @@
+run('notepad.exe',,,notepadPid)   ; Start notepad
+winWait('ahk_pid ' . notepadPid)  ; Wait until active
+sendInput ('hello world')         ; Type something
+
+sendInput ('!{f4}')
+
+; sleep(1000)
+
+winTitleSaveConfirmation := 'ahk_pid ' . notepadPid . ' ahk_class #32770'
+
+winWait(winTitleSaveConfirmation)
+
+h := winGetID(winTitleSaveConfirmation)
+; msgBox('hwnd = ' . h)
+
+  ctrls      := winGetControls(winTitleSaveConfirmation)
+; ctrls      := winGetControls('ahk_id ' . h)
+  ctrls_hwnd := winGetControlsHwnd(winTitleSaveConfirmation)
+
+; msgBox('type: ' . type(ctrls))
+; msgBox(ctrls)
+; msgBox('cnts: ' . ctrls.length() . ' / ' . ctrls_hwnd.length())
+
+for i, ctrl in (ctrls) {
+    msgBox (i . ': ' . ctrl . ': ' . ctrls_hwnd[i] . ' | ' . winGetTitle('ahk_id ' . ctrls_hwnd[i]))
+;   msgBox (i . ': ' . ctrl . ': ' . ctrls_hwnd[i])
+}
