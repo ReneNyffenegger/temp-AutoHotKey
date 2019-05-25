@@ -1,0 +1,9 @@
+i :=  42
+f :=  99.9
+s := 'hello world'
+
+msgBox (
+  'type(i) = ' . type(i) . '`n' .   ; Integer
+  'type(f) = ' . type(f) . '`n' .   ; Float
+  'type(s) = ' . type(s)            ; String
+)
