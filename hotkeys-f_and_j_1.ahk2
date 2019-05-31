@@ -10,6 +10,6 @@ f & j::
 ; is consumed (or swallowed)
 ;
 
-  msgBox('f & j')
+  msgBox('f and j simultaneously')
 
 return

@@ -1,0 +1,14 @@
+;
+;  The following hot key detects if an f is pressed, released and
+;  followed by a j that is pressed.
+;
+;  As soon as the f is pressed, it will be sent to the receiving
+;  application. If AHK detects the following j, the f is erased.
+;  
+;
+
+:*:fj::
+
+  msgBox('f followed by j')
+
+return
