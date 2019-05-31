@@ -1,6 +1,7 @@
 #singleInstance
 
-officeRootDir := "C:\Program Files (x86)\Microsoft Office\Office15\"
+; officeRootDir := "C:\Program Files (x86)\Microsoft Office\Office15\"  ; tsick
+  officeRootDir := 'C:\Program Files\Microsoft Office\root\Office16\'   ; om
 
 openOrSwitchToExe(path, exeName)
 {
@@ -18,19 +19,27 @@ openOrSwitchToExe(path, exeName)
 
 RAlt & g::
   gt := input("L10 T3", "{enter}{esc}")
-  if (errorLevel = "EndKey:Escape")
-  {
+  if (errorLevel = "EndKey:Escape") {
     msgBox ("Ended by Esc")
     return
   }
-  if (gt = "excel")
-  {
+  if (gt = "excel") {
     openOrSwitchToExe(officeRootDir, "excel.exe")
     return
   }
-  if (gt = "word")
-  {
+  if (gt = "word") {
     openOrSwitchToExe(officeRootDir, "winword.exe")
+    return
+  }
+  if (gt = "cmd") {
+  ;
+  ; For the time being: open a new cmd.exe rather than going to
+  ; an existing one
+  ;
+  ; openOrSwitchToExe(envGet('winDir') . '\System32', 'cmd.exe')
+
+    run(envGet('winDir') . '\System32\cmd.exe')
+  
     return
   }
   msgBox "gt = " gt ", that is, not excel."
