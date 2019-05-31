@@ -1,0 +1,18 @@
+
+;
+; Use $ so that the »send('f')« does not
+; retrigger the hot key
+;
+$f::
+
+  res := keyWait('j', 'D T0.5')
+  msgBox('waiting ended, res = ' . res)
+
+  if (res == 0) { ; f was not followed by j
+    send 'f'
+    return
+  }
+
+; msgBox('f followed by j')
+
+return
