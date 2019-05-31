@@ -1,0 +1,11 @@
+;
+; D: wait for pressing Down
+; T: Specify wait time in seconds
+;
+res := keyWait("k", "D T2.5")
+
+if (res == 0) {
+  msgBox("You didn't press k for two and a halve seconds")
+  return
+}
+msgBox("You pressed k within two and a halve seconds")
