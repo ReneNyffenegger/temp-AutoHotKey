@@ -1,0 +1,17 @@
+txt := 'The num is 42.'
+
+;
+;  Find consecutive digits (\d+) and
+;  replace them with fixed string NUMBER.
+;
+res := regexReplace(txt, '\d+', 'NUMBER')
+msgBox(res) ; The num is NUMBER
+
+;
+;  Find anything, but non-greedy (.*?), then
+;  find consecutive digits and capture them
+;  in parantheses, then match rest. Replace
+;  with captured digits ($1):
+;
+num := regexReplace(txt, '.*?(\d+).*', '$1')
+msgBox('num = ' . num)
