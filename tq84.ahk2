@@ -1,5 +1,7 @@
 #singleInstance
 
+::srn::site:renenyffenegger.ch
+
 ; officeRootDir := "C:\Program Files (x86)\Microsoft Office\Office15\"  ; tsick
   officeRootDir := 'C:\Program Files\Microsoft Office\root\Office16\'   ; om
 
