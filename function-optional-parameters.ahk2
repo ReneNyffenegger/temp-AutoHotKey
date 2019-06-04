@@ -1,0 +1,21 @@
+fnc(p_one, p_two := 42, p_three := 'hello world') {
+  msgBox('p_one =   ' . p_one   . '`n' .
+         'p_two =   ' . p_two   . '`n' .
+         'p_three = ' . p_three . '`n')
+}
+
+fnc('use all defaults')
+
+;
+; In the following call, the second parameter (p_two)
+; will have the value 42.
+;
+fnc('override 3rd param', , 'overridden')
+
+;
+; In the following call, the p_three does not
+; name a parameter. In fact, within the
+; function p_two will have the value 'x'
+; and p_three the value 'hello world'
+;
+fnc('override 3rd param', p_three := 'x')
