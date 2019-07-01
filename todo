@@ -22,3 +22,15 @@ WatchCursor()
 }
 
 }}}
+
+{{{
+
+; This should be replaced by whatever your native language is. See 
+; http://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
+; for the language identifiers list.
+el := DllCall("LoadKeyboardLayout", "Str", "00000408", "Int", 1)
+en := DllCall("LoadKeyboardLayout", "Str", "00000409", "Int", 1)
+;
+;   See https://superuser.com/a/1279805/16610
+
+}}}
