@@ -3,6 +3,9 @@ nestedArray := ['xyz', someArray]
 
 msgBox(type(someArray)) ; Object
 
+msgBox('count of items in someArray: '   . someArray.count())    ; 3
+msgBox('count of items in nestedArray: ' . nestedArray.length())  ; 2
+
 iterateOverObject(nestedArray)
 
 iterateOverObject(obj) {
@@ -15,5 +18,4 @@ iterateOverObject(obj) {
        msgBox (ix . ': ' . val)
      }
   }
-
 }
