@@ -1,0 +1,18 @@
+MB_YESNO := 4
+IDYES    := 6
+IDNO     := 7
+
+yes_or_no := dllCall('MessageBoxW',
+                      'Int', "0"         ,
+                      'Str', 'Yes or no?',
+                      'Str', 'Confess!'  ,
+                      'Int', MB_YESNO)
+
+if      yes_or_no = IDYES
+        msgBox 'You confessed'
+
+else if yes_or_no = IDNO
+        msgBox 'You did not confess'
+
+else
+        msgBox 'Unexpected answer'
