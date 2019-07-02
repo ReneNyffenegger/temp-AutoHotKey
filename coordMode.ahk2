@@ -1,9 +1,9 @@
-coordMode Mouse, relative
+coordMode('mouse', 'relative')
 
 mouseGetPos mouseX, mouseY
-msgBox mouse position relative to active window - X: %mouseX%, Y: %mouseY%
+msgBox('mouse position relative to active window:`nX: ' . mouseX . ', Y: ' . mouseY)
 
-coordMode Mouse, Screen
+coordMode('mouse', 'screen')
 
 mouseGetPos mouseX, mouseY
-msgBox mouse position relative to screen - X: %mouseX%, Y: %mouseY%
+msgBox('mouse position relative to screen:`nX: ' . mouseX . ', Y: ' . mouseY)
