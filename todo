@@ -1,5 +1,9 @@
 vim: foldmarker={{{,}}}
 
+;
+;    https://www.autohotkey.com/boards/viewtopic.php?t=51201&p=266114 (The 26x26 Grid)
+;
+
 {{{ https://lexikos.github.io/v2/docs/commands/MouseGetPos.htm
 
 MouseGetPos xpos, ypos 
