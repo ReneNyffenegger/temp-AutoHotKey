@@ -1,0 +1,28 @@
+g := guiCreate()
+
+g.onEvent('close', (*) => exitApp())
+
+lst := g.add('listView',
+   'r50 '  . ;  50 rows
+   'w600 ' . ; 600 pixels wide
+   'vEdt ' . ; Name of edit is Edt
+   'readonly',
+   'Index|HWND|Title'
+)
+
+g.show()
+
+allWindows := winGetList()
+
+lst.modifyCol(1, 'integer')
+lst.modifyCol(2, 'integer')
+
+for i, hwnd in allWindows {
+; edt.text := edt.text  . i . ': ' . hwnd . winGetTitle('ahk_id ' . hwnd) . "`r`n"
+  lst.add(, i, hwnd, winGetTitle('ahk_id ' . hwnd))
+}
+
+;
+; Autofit column header:
+;
+lst.modifyCol
