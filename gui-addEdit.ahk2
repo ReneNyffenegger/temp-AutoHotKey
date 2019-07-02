@@ -4,7 +4,7 @@ g.onEvent('close', (*) => exitApp())
 
 edt := g.add('edit',
    'r25 '  . ;  25 rows
-   'w300 ' . ; 600 pixels wide
+   'w300 ' . ; 300 pixels wide
    'vEdt ' . ; Name of edit is Edt
    'readonly'
 )
