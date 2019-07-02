@@ -1,4 +1,4 @@
-g := GuiCreate()
+g := guiCreate()
 
 g.options(
    '+caption '    . 
