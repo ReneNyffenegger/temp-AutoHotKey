@@ -1,4 +1,3 @@
-
 num_1 := 10
 num_2 := 32
 
@@ -8,11 +7,15 @@ else
    msgBox("num_1 + num_2 ≠ 42")
 
 
-if false {
-   msgBox("true statement 1")
-   msgBox("true statement 2")
+if 1 = 3 {
+   msgBox("1 = 3 statement 1")
+   msgBox("1 = 3 statement 2")
+}
+else if 1 = 2 {
+   msgBox("1 = 2 statement 1")
+   msgBox("1 = 2 statement 2")
 }
 else {
-   msgBox("false statement 1")
-   msgBox("false statement 2")
+   msgBox("else statement 1")
+   msgBox("else statement 2")
 }
