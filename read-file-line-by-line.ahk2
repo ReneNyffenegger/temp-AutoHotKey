@@ -1,0 +1,3 @@
+loop read 'read-file-line-by-line.ahk2' {
+  msgBox(a_loopReadLine)
+}
