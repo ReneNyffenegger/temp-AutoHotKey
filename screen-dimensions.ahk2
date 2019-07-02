@@ -1,0 +1,1 @@
+msgBox('Screen dimension: ' . a_screenWidth . ' x ' . a_screenHeight)
