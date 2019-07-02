@@ -1,0 +1,95 @@
+; vi: foldmarker={{{,}}} foldmethod=marker
+
+; {{{ dbg Windows
+
+dbgWin := guiCreate(
+  '+alwaysOnTop'
+)
+
+dbgWin.onEvent('close', (*) => exitApp())
+
+dbgWinEdit := dbgWin.add('edit',
+   'r1 '   . ; Number of rows
+   'w300 ' . ; Width in pixels
+   'vEdt ' . ; Name of control (introduced with v)
+   'readonly'
+)
+
+dbgAdd(txt) {
+  global dbgWinEdit
+  dbgWinEdit.text := dbgWinEdit.text  . txt
+}
+
+dbgSet(txt) {
+  global dbgWinEdit
+  dbgWinEdit.text := txt
+}
+
+
+; writeMousePositionIntoEdit() {
+; 
+;   coordMode('mouse', 'screen')
+;   mouseGetPos mouseX, mouseY
+; 
+;   global dbgWinEdit
+;   dbgWinEdit.text := dbgWinEdit.text  .  mouseX . ' / ' . mouseY . "`r`n"
+; }
+
+dbgWin.show('x0 ' . 'y0')
+
+; }}}
+
+activeProcess() { ; {{{
+
+  return winGetProcessName('a')
+
+} ; }}}
+
+vim_ignore_hotkey() { ; {{{
+
+  proc := activeProcess()
+
+  if proc = 'ggg.exe' or proc = 'gvim.exe' or proc = 'vim.exe'
+     return 1
+
+  return 0
+; dbgSet(proc)
+
+} ; }}}
+
+; vim_mode := 'insert'
+
+esc:: ; {{{
+^[::
+
+  vim_normal_mode()
+
+return ; }}}
+
+i:: ; {{{
+
+  vim_insert_mode()  
+
+return ; }}}
+
+vim_normal_mode() { ; {{{
+
+   if vim_ignore_hotkey() {
+      dbgSet('Not entering normal mode because vim_ignore_hotkey.')
+      return
+   }
+
+
+;  global vim_mode
+;  vim_mode := 'normal'
+
+   dbgSet('Entered normal mode')
+} ; }}}
+
+vim_insert_mode() { ; {{{
+
+;  global vim_mode
+;  vim_mode := 'normal'
+
+   dbgSet('Entered insert mode')
+} ; }}}
