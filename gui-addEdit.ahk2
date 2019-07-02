@@ -1,0 +1,25 @@
+g := guiCreate()
+
+g.onEvent('close', (*) => exitApp())
+
+edt := g.add('edit',
+   'r25 '  . ;  25 rows
+   'w300 ' . ; 600 pixels wide
+   'vEdt ' . ; Name of edit is Edt
+   'readonly'
+)
+
+; msgBox ('Type(edt) = ' . type(edt)) ; GuiEdit
+
+setTimer 'writeMousePositionIntoEdit', 1000
+
+writeMousePositionIntoEdit() {
+
+  coordMode('mouse', 'screen')
+  mouseGetPos mouseX, mouseY
+
+  global edt
+  edt.text := edt.text  .  mouseX . ' / ' . mouseY . "`r`n"
+}
+
+g.show()
