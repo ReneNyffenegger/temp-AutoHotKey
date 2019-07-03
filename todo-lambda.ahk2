@@ -1,0 +1,15 @@
+;
+;  Why does this compile?
+;
+
+() => {
+  lambda:
+  dllCall('one')
+ 	dllCall('two')
+}
+
+() => [
+	DllCall( 1 )
+	DllCall( 2 )
+	DllCall( 2 )
+]

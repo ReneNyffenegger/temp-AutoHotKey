@@ -2,7 +2,7 @@ sumFuncResultOnArray(ary, f) {
    s := 0 
 
    for idx, itm in ary {
-     s := s+f.call(itm)
+     s := s + f.call(itm)
    }
 
    return s
