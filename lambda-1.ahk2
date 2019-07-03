@@ -1,0 +1,11 @@
+sumFuncResultOnArray(ary, f) {
+   s := 0 
+
+   for idx, itm in ary {
+     s := s+f.call(itm)
+   }
+
+   return s
+}
+
+msgbox (sumFuncResultOnArray([3, 6, 7], (e) => 2*e )) ; 32   (= 2*3 + 2*6 + 2*7 = 6+12+14)
