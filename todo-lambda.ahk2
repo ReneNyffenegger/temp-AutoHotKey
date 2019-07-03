@@ -1,6 +1,8 @@
 ;
 ;  Why does this compile?
 ;
+;  Found @ https://www.autohotkey.com/boards/viewtopic.php?t=46150 
+;
 
 () => {
   lambda:
