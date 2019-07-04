@@ -1,0 +1,14 @@
+g := guiCreate()
+
+g.onEvent('close', (*) => exitApp())
+
+      ;         type ,  options     ,  caption
+      ;         ---- ,  ----------- ,  -------
+txt_1 := g.add('text', 'w50'        , 'txt 1'  )
+txt_2 := g.add('text', 'w50'        , 'txt 2'  ) ; control added below previous one
+txt_3 := g.add('text', 'w50 section', 'txt 3'  ) ; control added below previous one - new section started
+txt_6 := g.add('text', 'w50'        , 'txt 6'  ) ; contral added below previous one
+txt_4 := g.add('text', 'w50 ys'     , 'txt 4'  ) ; Using ys to place control with same y as previous section, as left as possible
+txt_5 := g.add('text', 'w50 ys'     , 'txt 5'  ) ; Using ys to place control with same y as previous section, as left as possible
+
+g.show()
