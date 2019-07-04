@@ -1,0 +1,8 @@
+$a::
+
+  msgBox('a was pressed - sleep a second, then send key a')
+  sleep 1000
+  send('a')
+
+return
+q::exitApp()
