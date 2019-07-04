@@ -9,6 +9,7 @@ dbgWin := guiCreate(
 dbgWin.onEvent('close', (*) => exitApp())
 
 dbgText := dbgWin.add('text', 'w20 section')
+dbgProc := dbgWin.add('text', 'w90 ys'     )
 
 dbgWinEdit := dbgWin.add('text',
 ;  'r1 '   . ; Number of rows
@@ -51,21 +52,22 @@ vim_ignore_hotkey() { ; {{{
 
   proc := activeProcess()
 
+  global dbgProc
+  dbgProc.text := proc
+
   if proc = 'ggg.exe' or proc = 'gvim.exe' or proc = 'vim.exe'
      return 1
 
   return 0
-; dbgSet(proc)
 
 } ; }}}
 
 vim_insert_mode()
-; vim_mode := 'insert'
 
-esc:: ; {{{
+$esc:: ; {{{
 ^[::
 
-  vim_normal_mode()
+  vim_normal_mode('{esc}')
 
 return ; }}}
 
@@ -158,6 +160,18 @@ $+x:: ; {{{
 
 return ; }}}
 
+$0:: ; {{{
+
+  vim_normal_command('0', '{home}')
+
+return ; }}}
+
+$$:: ; {{{
+
+  vim_normal_command('$', '{end}')
+
+return ; }}}
+
 vim_normal_to_insert_mode(toggleKey, keysToSend) { ; {{{
 
   global vim_mode
@@ -201,19 +215,16 @@ vim_normal_command(commandKey, keysToSend) { ; {{{
   
 } ; }}}
 
-vim_normal_mode() { ; {{{
+vim_normal_mode(triggeringKey) { ; {{{
 
    if vim_ignore_hotkey() {
       dbgSet('Not entering normal mode because vim_ignore_hotkey.')
+      send(triggeringKey)
       return
    }
 
    vim_set_mode('n')
 
-;  global vim_mode
-;  vim_mode := 'normal'
-
-;  dbgSet('Entered normal mode')
 } ; }}}
 
 vim_set_mode(mode) { ; {{{
