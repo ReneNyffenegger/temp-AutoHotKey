@@ -84,7 +84,7 @@ return ; }}}
 
 $h:: ; {{{
 
-  vim_normal_move('h', '{left}')
+  vim_normal_command('h', '{left}')
 
 return ; }}}
 
@@ -105,28 +105,25 @@ return ; }}}
 
 $j:: ; {{{
 
-  vim_normal_move('j', '{down}')
+  vim_normal_command('j', '{down}')
 
 return ; }}}
 
 $k:: ; {{{
 
-  vim_normal_move('k', '{up}')
+  vim_normal_command('k', '{up}')
 
 return ; }}}
 
 $l:: ; {{{
 
-  vim_normal_move('l', '{right}')
+  vim_normal_command('l', '{right}')
 
 return ; }}}
 
 $o:: ; {{{
 
   vim_normal_to_insert_mode('o', '{end}{enter}')
-
-; send('{end}{enter}')
-; vim_insert_mode()  
 
 return ; }}}
 
@@ -135,6 +132,18 @@ $+o:: ; {{{
 
 ; send('{up}{end}{enter}')
 ; vim_insert_mode()  
+
+return ; }}}
+
+$x:: ; {{{
+
+  vim_normal_command('x', '{delete}')
+
+return ; }}}
+
+$+x:: ; {{{
+
+  vim_normal_command('x', '{bs}')
 
 return ; }}}
 
@@ -158,7 +167,7 @@ vim_normal_to_insert_mode(toggleKey, keysToSend) { ; {{{
 
 } ; }}}
 
-vim_normal_move(commandKey, keysToSend) { ; {{{
+vim_normal_command(commandKey, keysToSend) { ; {{{
 
   global vim_mode
 
@@ -168,7 +177,7 @@ vim_normal_move(commandKey, keysToSend) { ; {{{
      return
   }
 
-  dbgSet('vim_normal_move: ')
+  dbgSet('vim_normal_command: ')
 
   if vim_mode != 'normal' {
      dbgAdd('vim mode = ' . vim_mode)
