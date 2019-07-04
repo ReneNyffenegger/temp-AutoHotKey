@@ -85,6 +85,10 @@ $+a:: ; {{{
 
 return ; }}}
 
+$b:: ; {{{
+  vim_normal_command('b', '^{left}')
+return ; }}}
+
 $h:: ; {{{
 
   vim_normal_command('h', '{left}')
@@ -136,6 +140,10 @@ $+o:: ; {{{
 ; send('{up}{end}{enter}')
 ; vim_insert_mode()  
 
+return ; }}}
+
+$w:: ; {{{
+  vim_normal_command('w', '^{right}')
 return ; }}}
 
 $x:: ; {{{
