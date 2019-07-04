@@ -66,14 +66,14 @@ esc:: ; {{{
 
 return ; }}}
 
-i:: ; {{{
+$i:: ; {{{
 
   vim_normal_to_insert_mode('i', '')
 ; vim_insert_mode()  
 
 return ; }}}
 
-+i:: ; {{{
+$+i:: ; {{{
 
   vim_normal_to_insert_mode('I', '{home}')
 ; send('{home}')
@@ -114,8 +114,33 @@ $+o:: ; {{{
 
 return ; }}}
 
+$h:: ; {{{
+
+  vim_normal_move('h', '{left}')
+
+return ; }}}
+
+$j:: ; {{{
+
+  vim_normal_move('j', '{down}')
+
+return ; }}}
+
+$k:: ; {{{
+
+  vim_normal_move('k', '{up}')
+
+return ; }}}
+
+$l:: ; {{{
+
+  vim_normal_move('l', '{right}')
+
+return ; }}}
+
 vim_normal_to_insert_mode(toggleKey, keysToSend) { ; {{{
 
+  global vim_mode
   if vim_ignore_hotkey() {
      dbgSet('Not going from normal to insert mode because vim_ignore_hotkey.')
      send(toggleKey)
@@ -127,10 +152,33 @@ vim_normal_to_insert_mode(toggleKey, keysToSend) { ; {{{
      return
   }
 
-  send(keys)
+  send(keysToSend)
 
   vim_insert_mode()
 
+} ; }}}
+
+vim_normal_move(commandKey, keysToSend) { ; {{{
+
+  global vim_mode
+
+  if vim_ignore_hotkey() {
+     dbgSet('Not going from normal to insert mode because vim_ignore_hotkey.')
+     send(commandKey)
+     return
+  }
+
+  dbgSet('vim_normal_move: ')
+
+  if vim_mode != 'normal' {
+     dbgAdd('vim mode = ' . vim_mode)
+     send(commandKey)
+     return
+  }
+
+  dbgAdd(', sending ' . keysToSend)
+  send(keysToSend)
+  
 } ; }}}
 
 vim_normal_mode() { ; {{{
@@ -149,7 +197,7 @@ vim_normal_mode() { ; {{{
 vim_insert_mode() { ; {{{
 
    global vim_mode
-   vim_mode := 'normal'
+   vim_mode := 'insert'
 
    dbgSet('Entered insert mode')
 } ; }}}
