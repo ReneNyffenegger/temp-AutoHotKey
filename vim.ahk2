@@ -66,21 +66,6 @@ esc:: ; {{{
 
 return ; }}}
 
-$i:: ; {{{
-
-  vim_normal_to_insert_mode('i', '')
-; vim_insert_mode()  
-
-return ; }}}
-
-$+i:: ; {{{
-
-  vim_normal_to_insert_mode('I', '{home}')
-; send('{home}')
-; vim_insert_mode()  
-
-return ; }}}
-
 $a:: ; {{{
   vim_normal_to_insert_mode('a', '{right}')
 
@@ -97,26 +82,24 @@ $+a:: ; {{{
 
 return ; }}}
 
-$o:: ; {{{
-
-  vim_normal_to_insert_mode('o', '{end}{enter}')
-
-; send('{end}{enter}')
-; vim_insert_mode()  
-
-return ; }}}
-
-$+o:: ; {{{
-  vim_normal_to_insert_mode('O', '{up}{end}{enter}')
-
-; send('{up}{end}{enter}')
-; vim_insert_mode()  
-
-return ; }}}
-
 $h:: ; {{{
 
   vim_normal_move('h', '{left}')
+
+return ; }}}
+
+$i:: ; {{{
+
+  vim_normal_to_insert_mode('i', '')
+; vim_insert_mode()  
+
+return ; }}}
+
+$+i:: ; {{{
+
+  vim_normal_to_insert_mode('I', '{home}')
+; send('{home}')
+; vim_insert_mode()  
 
 return ; }}}
 
@@ -135,6 +118,23 @@ return ; }}}
 $l:: ; {{{
 
   vim_normal_move('l', '{right}')
+
+return ; }}}
+
+$o:: ; {{{
+
+  vim_normal_to_insert_mode('o', '{end}{enter}')
+
+; send('{end}{enter}')
+; vim_insert_mode()  
+
+return ; }}}
+
+$+o:: ; {{{
+  vim_normal_to_insert_mode('O', '{up}{end}{enter}')
+
+; send('{up}{end}{enter}')
+; vim_insert_mode()  
 
 return ; }}}
 
