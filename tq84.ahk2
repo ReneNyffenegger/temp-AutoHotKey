@@ -40,9 +40,15 @@ RAlt & g::
   ;
   ; openOrSwitchToExe(envGet('winDir') . '\System32', 'cmd.exe')
 
-    run(envGet('winDir') . '\System32\cmd.exe')
+  ; run(envGet('winDir') . '\System32\cmd.exe')
+    run(a_windir         . '\System32\cmd.exe')
   
     return
+  }
+  if (gt = 'snip') {
+    openOrSwitchToExe(a_windir . '\System32\', "SnippingTool.exe")
+    return
+
   }
   msgBox "gt = " gt ", that is, not excel."
 return

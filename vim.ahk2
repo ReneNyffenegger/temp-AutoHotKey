@@ -8,11 +8,13 @@ dbgWin := guiCreate(
 
 dbgWin.onEvent('close', (*) => exitApp())
 
-dbgWinEdit := dbgWin.add('edit',
-   'r1 '   . ; Number of rows
-   'w300 ' . ; Width in pixels
-   'vEdt ' . ; Name of control (introduced with v)
-   'readonly'
+dbgText := dbgWin.add('text', 'w20 section')
+
+dbgWinEdit := dbgWin.add('text',
+;  'r1 '   . ; Number of rows
+   'w300 ys'   ; Width in pixels
+;  'vEdt '   ; Name of control (introduced with v)
+;  'readonly'
 )
 
 dbgAdd(txt) {
@@ -57,7 +59,8 @@ vim_ignore_hotkey() { ; {{{
 
 } ; }}}
 
-vim_mode := 'insert'
+vim_insert_mode()
+; vim_mode := 'insert'
 
 esc:: ; {{{
 ^[::
@@ -156,7 +159,7 @@ vim_normal_to_insert_mode(toggleKey, keysToSend) { ; {{{
      return
   }
 
-  if vim_mode != 'normal' {
+  if vim_mode != 'n' {
      send(toggleKey)
      return
   }
@@ -179,7 +182,7 @@ vim_normal_command(commandKey, keysToSend) { ; {{{
 
   dbgSet('vim_normal_command: ')
 
-  if vim_mode != 'normal' {
+  if vim_mode != 'n' {
      dbgAdd('vim mode = ' . vim_mode)
      send(commandKey)
      return
@@ -197,16 +200,29 @@ vim_normal_mode() { ; {{{
       return
    }
 
-   global vim_mode
-   vim_mode := 'normal'
+   vim_set_mode('n')
 
-   dbgSet('Entered normal mode')
+;  global vim_mode
+;  vim_mode := 'normal'
+
+;  dbgSet('Entered normal mode')
+} ; }}}
+
+vim_set_mode(mode) { ; {{{
+
+   global vim_mode
+   global dbgText
+   vim_mode     := mode
+   dbgText.text := mode
+;  vim_mode := 'insert'
+
+   dbgSet('Entered ' . mode . ' mode')
+
 } ; }}}
 
 vim_insert_mode() { ; {{{
 
-   global vim_mode
-   vim_mode := 'insert'
+   vim_set_mode('i')
 
-   dbgSet('Entered insert mode')
+;  dbgSet('Entered insert mode')
 } ; }}}
