@@ -81,17 +81,19 @@ return ; }}}
 
 return ; }}}
 
-a:: ; {{{
+$a:: ; {{{
+  vim_normal_to_insert_mode('a', '{right}')
 
-  send('{right}')
-  vim_insert_mode()  
+; send('{right}')
+; vim_insert_mode()  
 
 return ; }}}
 
-+a:: ; {{{
+$+a:: ; {{{
 
-  send('{end}')
-  vim_insert_mode()  
+  vim_normal_to_insert_mode('A', '{end}')
+; send('{end}')
+; vim_insert_mode()  
 
 return ; }}}
 
@@ -104,10 +106,11 @@ $o:: ; {{{
 
 return ; }}}
 
-+o:: ; {{{
+$+o:: ; {{{
+  vim_normal_to_insert_mode('O', '{up}{end}{enter}')
 
-  send('{up}{end}{enter}')
-  vim_insert_mode()  
+; send('{up}{end}{enter}')
+; vim_insert_mode()  
 
 return ; }}}
 
