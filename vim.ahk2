@@ -10,6 +10,7 @@ dbgWin.onEvent('close', (*) => exitApp())
 
 dbgText := dbgWin.add('text', 'w20 section')
 dbgProc := dbgWin.add('text', 'w90 ys'     )
+dbgRep  := dbgWin.add('text', 'w90 ys'     )
 
 dbgWinEdit := dbgWin.add('text',
 ;  'r1 '   . ; Number of rows
@@ -63,6 +64,8 @@ vim_ignore_hotkey() { ; {{{
 } ; }}}
 
 vim_insert_mode()
+command_repetition := 0
+dbgRep.text := command_repetition
 
 $esc:: ; {{{
 ^[::
@@ -162,7 +165,56 @@ return ; }}}
 
 $0:: ; {{{
 
-  vim_normal_command('0', '{home}')
+  global command_repetition
+  if command_repetition = 0 
+     vim_normal_command('0', '{home}')
+  else
+     vim_normal_digit('0')
+
+return ; }}}
+$1:: ; {{{
+
+   vim_normal_digit('1')
+
+return ; }}}
+$2:: ; {{{
+
+   vim_normal_digit('2')
+
+return ; }}}
+$3:: ; {{{
+
+   vim_normal_digit('3')
+
+return ; }}}
+$4:: ; {{{
+
+   vim_normal_digit('4')
+
+return ; }}}
+$5:: ; {{{
+
+   vim_normal_digit('5')
+
+return ; }}}
+$6:: ; {{{
+
+   vim_normal_digit('6')
+
+return ; }}}
+$7:: ; {{{
+
+   vim_normal_digit('7')
+
+return ; }}}
+$8:: ; {{{
+
+   vim_normal_digit('8')
+
+return ; }}}
+$9:: ; {{{
+
+   vim_normal_digit('9')
 
 return ; }}}
 
@@ -174,13 +226,13 @@ return ; }}}
 
 vim_normal_to_insert_mode(toggleKey, keysToSend) { ; {{{
 
-  global vim_mode
   if vim_ignore_hotkey() {
      dbgSet('Not going from normal to insert mode because vim_ignore_hotkey.')
      send(toggleKey)
      return
   }
 
+  global vim_mode
   if vim_mode != 'n' {
      send(toggleKey)
      return
@@ -204,6 +256,7 @@ vim_normal_command(commandKey, keysToSend) { ; {{{
 
   dbgSet('vim_normal_command: ')
 
+  global vim_Mode
   if vim_mode != 'n' {
      dbgAdd('vim mode = ' . vim_mode)
      send(commandKey)
@@ -211,8 +264,38 @@ vim_normal_command(commandKey, keysToSend) { ; {{{
   }
 
   dbgAdd(', sending ' . keysToSend)
-  send(keysToSend)
+
+  if command_repetition  = 0
+     command_repetition := 1
+
+  loop command_repetition
+       send(keysToSend)
+
+  command_repetition := 0
+  global dbgRep
+  dbgRep.text := command_repetition
   
+} ; }}}
+
+vim_normal_digit(digit) { ; {{{
+
+  if vim_ignore_hotkey() {
+     send(digit)
+     return
+  }
+
+  
+  global vim_mode
+  if vim_mode != 'n' {
+     send(digit)
+     return
+  }
+
+  global command_repetition
+  command_repetition := 10*command_repetition + digit
+  global dbgRep
+  dbgRep.text := command_repetition
+
 } ; }}}
 
 vim_normal_mode(triggeringKey) { ; {{{
@@ -223,6 +306,10 @@ vim_normal_mode(triggeringKey) { ; {{{
       return
    }
 
+   global command_repetition
+   command_repetition := 0
+   global dbgRep
+   dbgRep.text := command_repetition
    vim_set_mode('n')
 
 } ; }}}
