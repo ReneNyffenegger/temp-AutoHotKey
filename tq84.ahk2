@@ -5,14 +5,19 @@
 ; officeRootDir := "C:\Program Files (x86)\Microsoft Office\Office15\"  ; tsick
   officeRootDir := 'C:\Program Files\Microsoft Office\root\Office16\'   ; om
 
-openOrSwitchToExe(path, exeName)
-{
-   if (pid       := processExist( exeName   ))
-   {
+openOrSwitchToExe(path, exeName) {
+
+   if pid       := processExist(exeName) {
      winActivate("ahk_pid " pid)
    }
    else {
-     run         (path    . exeName)
+     if workDir = '' {
+        run(path . exeName)
+     }
+     else {
+        msgBox(path . exeName . '`n' . workDir)
+        run path . exeName, workDir
+     }
      WinWait    ("ahk_exe " exeName)
      WinActivate("ahk_exe " exeName)
    }
@@ -31,6 +36,16 @@ RAlt & g::
   }
   if (gt = "word") {
     openOrSwitchToExe(officeRootDir, "winword.exe")
+    return
+  }
+  if (gt = "mail") {
+    global officeRootDir
+;   openOrSwitchToExe(officeRootDir, "outlook.exe", officeRootDir)
+    openOrSwitchToExe(officeRootDir, "outlook.exe")
+
+;   run  officeRootDir . 'outlook.exe', 'C:\Program Files\Microsoft Office\Root\Office16\'
+;   run  a_comSpec . ' /c ' . officeRootDir . 'outlook.exe'
+
     return
   }
   if (gt = "cmd") {
