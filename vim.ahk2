@@ -49,15 +49,17 @@ activeProcess() { ; {{{
 
 } ; }}}
 
-vim_ignore_hotkey() { ; {{{
+vim_ignore_hotkey(hotkey) { ; {{{
 
   proc := activeProcess()
 
   global dbgProc
   dbgProc.text := proc
 
-  if proc = 'ggg.exe' or proc = 'gvim.exe' or proc = 'vim.exe'
+  if proc = 'ggg.exe' or proc = 'gvim.exe' or proc = 'vim.exe' {
+     send(hotkey)
      return 1
+  }
 
   return 0
 
@@ -75,11 +77,6 @@ $esc:: ; {{{
 return ; }}}
 
 $a:: ; {{{
-  vim_normal_to_insert_mode('a', '{right}')
-
-; send('{right}')
-; vim_insert_mode()  
-
 return ; }}}
 
 $+a:: ; {{{
@@ -92,6 +89,21 @@ return ; }}}
 
 $b:: ; {{{
   vim_normal_command('b', '^{left}')
+return ; }}}
+
+$d:: ; {{{
+
+  if vim_ignore_hotkey('d') {
+;    send('d')
+     return
+  }
+
+  global vim_mode
+  if vim_mode != 'n' {
+     send('d')
+     return
+  }
+
 return ; }}}
 
 $h:: ; {{{
@@ -163,6 +175,7 @@ $+x:: ; {{{
 
 return ; }}}
 
+; {{{ Digits
 $0:: ; {{{
 
   global command_repetition
@@ -217,6 +230,7 @@ $9:: ; {{{
    vim_normal_digit('9')
 
 return ; }}}
+; }}}
 
 $$:: ; {{{
 
@@ -226,9 +240,9 @@ return ; }}}
 
 vim_normal_to_insert_mode(toggleKey, keysToSend) { ; {{{
 
-  if vim_ignore_hotkey() {
+  if vim_ignore_hotkey(toggleKey) {
      dbgSet('Not going from normal to insert mode because vim_ignore_hotkey.')
-     send(toggleKey)
+;    send(toggleKey)
      return
   }
 
@@ -248,9 +262,9 @@ vim_normal_command(commandKey, keysToSend) { ; {{{
 
   global vim_mode
 
-  if vim_ignore_hotkey() {
+  if vim_ignore_hotkey(commandKey) {
      dbgSet('Not going from normal to insert mode because vim_ignore_hotkey.')
-     send(commandKey)
+;    send(commandKey)
      return
   }
 
@@ -279,8 +293,8 @@ vim_normal_command(commandKey, keysToSend) { ; {{{
 
 vim_normal_digit(digit) { ; {{{
 
-  if vim_ignore_hotkey() {
-     send(digit)
+  if vim_ignore_hotkey(digit) {
+;    send(digit)
      return
   }
 
@@ -300,9 +314,9 @@ vim_normal_digit(digit) { ; {{{
 
 vim_normal_mode(triggeringKey) { ; {{{
 
-   if vim_ignore_hotkey() {
+   if vim_ignore_hotkey(triggeringKey) {
       dbgSet('Not entering normal mode because vim_ignore_hotkey.')
-      send(triggeringKey)
+;     send(triggeringKey)
       return
    }
 

@@ -1,0 +1,22 @@
+class cls {
+
+   __new(foo, bar, baz) {
+         this.foo := foo
+         this.bar := bar
+         this.baz := baz
+   }
+
+   msg() {
+
+      msgBox('foo = ' . this.foo . 
+           '`nbar = ' . this.bar . 
+           '`nbaz = ' . this.baz)
+
+   }
+}
+
+obj_1 := new cls(   1,     2,       3 )
+obj_2 := new cls('one', 'two', 'three')
+
+obj_1.msg()
+obj_2.msg()

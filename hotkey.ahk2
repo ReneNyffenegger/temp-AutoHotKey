@@ -1,4 +1,8 @@
-hotkey '^a', 'ctrl_a'  ; ctrl-a opens message box
+hotkey_trigger  := '^a'
+hotkey_function := 'ctrl_a'
+
+hotkey(hotkey_trigger, hotkey_function)  ; ctrl-a opens message box
+
 hotkey '!q', 'exitApp' ; Alt-q quits application
 
 ctrl_a() {
