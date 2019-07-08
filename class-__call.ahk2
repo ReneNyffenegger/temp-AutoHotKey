@@ -1,0 +1,26 @@
+class C {
+
+   __call(method_name, params*) {
+   ;
+
+     param_str := ''
+     for ix in params {
+
+       param_str := param_str . ' - param_' . ix . '=' . params[ix] 
+
+     }
+
+     msgBox('Someone tried to call ' . method_name . param_str)
+   ;
+   ; The return statement seems to be kind of important: 
+   ;
+     return
+   }
+
+}
+
+obj := new C
+
+obj.a_func()
+
+obj.another_func('foo', 'bar', 'baz')
