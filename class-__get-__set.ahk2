@@ -1,0 +1,16 @@
+class C {
+
+  __get(attr) {
+     msgBox('Someone attempted to get the value of ' . attr)
+     return 42
+  }
+
+  __set(attr, val) {
+     msgBox('Someone attempted to set the value of ' . attr . ' to ' . val)
+  }
+
+}
+
+obj := new C()
+
+obj.foo := obj.bar
