@@ -1,11 +1,17 @@
 class cls {
 
+;
+;    The constructur
+;
    __new(foo, bar, baz) {
          this.foo := foo
          this.bar := bar
          this.baz := baz
    }
 
+;
+;    A member procedure / function:
+;
    msg() {
 
       msgBox('foo = ' . this.foo . 
