@@ -1,0 +1,6 @@
+hotkey '^a', 'ctrl_a'  ; ctrl-a opens message box
+hotkey '!q', 'exitApp' ; Alt-q quits application
+
+ctrl_a() {
+  msgBox('ctrl_a was pressed')
+}
