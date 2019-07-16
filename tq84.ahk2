@@ -1,9 +1,19 @@
 #singleInstance
 
-::srn::site:renenyffenegger.ch
-
 ; officeRootDir := "C:\Program Files (x86)\Microsoft Office\Office15\"  ; tsick
   officeRootDir := 'C:\Program Files\Microsoft Office\root\Office16\'   ; om
+
+ralt_g := {
+  'excel'  : { 'path':  officeRootDir            , 'exe': 'excel.exe'         },
+  'word'   : { 'path':  officeRootDir            , 'exe': 'word.exe'          },
+  'snip'   : { 'path':  a_windir . '\System32\'  , 'exe': 'SnippingTool.exe'  },
+  'papp'   : { 'path': 'c:\PortableApps.com\'    , 'exe': 'start.exe'         }
+}
+
+
+::srn::site:renenyffenegger.ch
+
+
 
 openOrSwitchToExe(path, exeName) {
 
@@ -24,9 +34,6 @@ openOrSwitchToExe(path, exeName) {
 
 }
 
-ralt_g := {
-  'papp'   : 'c:\PortableApps.com\start.exe'
-}
 
 RAlt & g::
   gt := input("L10 T3", "{enter}{esc}")
@@ -34,14 +41,14 @@ RAlt & g::
     msgBox ("Ended by Esc")
     return
   }
-  if (gt = "excel") {
-    openOrSwitchToExe(officeRootDir, "excel.exe")
-    return
-  }
-  if (gt = "word") {
-    openOrSwitchToExe(officeRootDir, "winword.exe")
-    return
-  }
+; if (gt = "excel") {
+;   openOrSwitchToExe(officeRootDir, "excel.exe")
+;   return
+; }
+; if (gt = "word") {
+;   openOrSwitchToExe(officeRootDir, "winword.exe")
+;   return
+; }
   if (gt = "mail") {
     global officeRootDir
 ;   openOrSwitchToExe(officeRootDir, "outlook.exe", officeRootDir)
@@ -64,13 +71,16 @@ RAlt & g::
   
     return
   }
-  if (gt = 'snip') {
-    openOrSwitchToExe(a_windir . '\System32\', "SnippingTool.exe")
-    return
-
-  }
+; if (gt = 'snip') {
+;   openOrSwitchToExe(a_windir . '\System32\', "SnippingTool.exe")
+;   return
+; }
 
   global ralt_g
-
-  msgBox "gt = " gt ", that is, not excel."
+  if ralt_g.hasKey(gt) {
+    openOrSwitchToExe(ralt_g[gt]['path'], ralt_g[gt]['exe'])
+  }
+  else {
+    msgBox('gt = ' . gt . ' was not found in ralt_g')
+  }
 return
