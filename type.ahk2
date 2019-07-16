@@ -3,7 +3,8 @@ f :=  99.9
 s := 'hello world'
 
 msgBox (
-  'type(i) = ' . type(i) . '`n' .   ; Integer
-  'type(f) = ' . type(f) . '`n' .   ; Float
-  'type(s) = ' . type(s)            ; String
+  'type(i)    = ' . type(i) . '`n' .   ; Integer
+  'type(f)    = ' . type(f) . '`n' .   ; Float
+  'type(s)    = ' . type(s) . '`n' .   ; String
+  'type(null) = ' . type(null)         ; String
 )
