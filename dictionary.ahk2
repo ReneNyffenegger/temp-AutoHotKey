@@ -1,0 +1,12 @@
+someDictionary := {
+  'the-number':  42          ,
+  'greeting'  : 'Hello world',
+  'fruit'     : 'apple'      ,
+}
+
+msg(item) {
+  global someDictionary
+  msgBox(someDictionary[item])
+}
+
+msg('greeting')
