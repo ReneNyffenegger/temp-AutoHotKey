@@ -1,0 +1,19 @@
+dict := {
+  'foo': 1   ,
+  'bar': null,
+}
+
+if dict.hasKey('foo')
+   msgBox('foo exists')
+else
+   msgBox('foo does not exists')
+
+if dict.hasKey('bar')
+   msgBox('bar exists')
+else
+   msgBox('bar does not exists')
+
+if dict.hasKey('baz')
+   msgBox('baz exists')
+else
+   msgBox('baz does not exists')
