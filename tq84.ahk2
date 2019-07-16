@@ -24,6 +24,10 @@ openOrSwitchToExe(path, exeName) {
 
 }
 
+ralt_g := {
+  'papp'   : 'c:\PortableApps.com\start.exe'
+}
+
 RAlt & g::
   gt := input("L10 T3", "{enter}{esc}")
   if (errorLevel = "EndKey:Escape") {
@@ -65,5 +69,8 @@ RAlt & g::
     return
 
   }
+
+  global ralt_g
+
   msgBox "gt = " gt ", that is, not excel."
 return
