@@ -6,8 +6,13 @@
 ;
 
 setTitleMatchMode('regEx')
-l := winGetList('i)prompt')
+l := winGetList('i)viewer')
 
 for i, hwnd in l {
-  msgBox('real title of hwnd ' . hwnd . ' = ' . winGetTitle('ahk_id ' . hwnd))
+  msgBox(
+   'hwnd   = ' . hwnd                                .
+  '`ntitle = ' . winGetTitle      ('ahk_id ' . hwnd) .
+  '`nclass = ' . winGetClass      ('ahk_id ' . hwnd) .
+  '`nProc  = ' . winGetProcessName('ahk_id ' . hwnd)
+ )
 }
