@@ -1,0 +1,13 @@
+;
+;  WinGetList() by default searches case sensitively. 
+;
+;  By setting the match mode to regEx and using i), the
+;  behaviour can be changed to searching case insenstive.
+;
+
+setTitleMatchMode('regEx')
+l := winGetList('i)prompt')
+
+for i, hwnd in l {
+  msgBox('real title of hwnd ' . hwnd . ' = ' . winGetTitle('ahk_id ' . hwnd))
+}

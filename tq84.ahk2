@@ -71,6 +71,13 @@ RAlt & g::
   
     return
   }
+  if (gt = 'citr') {
+   if pid       := processExist('concentr.exe') {
+     msgBox('pid = ' . pid)
+     winActivate("ahk_pid " pid)
+   }
+    return
+  }
 ; if (gt = 'snip') {
 ;   openOrSwitchToExe(a_windir . '\System32\', "SnippingTool.exe")
 ;   return
