@@ -3,6 +3,7 @@
 ; officeRootDir := "C:\Program Files (x86)\Microsoft Office\Office15\"  ; tsick
   officeRootDir := 'C:\Program Files\Microsoft Office\root\Office16\'   ; om
 
+
 ralt_g := {
   'excel'  : { 'path':  officeRootDir            , 'exe': 'excel.exe'         },
   'word'   : { 'path':  officeRootDir            , 'exe': 'word.exe'          },
@@ -14,6 +15,128 @@ ralt_g := {
 ::srn::site:renenyffenegger.ch
 
 
+WinGetPosEx(
+    hWindow
+  ; ByRef X="",
+  ; ByRef Y="",
+  ; ByRef Width="",
+  ; ByRef Height="",
+  ; ByRef Offset_X="",
+  ; ByRef Offset_Y=""
+    ) {
+
+  ;
+  ; Found at
+  ;    https://github.com/zkhvan/WinGetPosEx/blob/master/WinGetPosEx.ahk
+  ;
+
+
+    Static Dummy5693
+        , RECTPlus
+        , S_OK                        := 0x0
+        , DWMWA_EXTENDED_FRAME_BOUNDS := 9
+
+    ; Workaround for AutoHotkey Basic
+    PtrType := (A_PtrSize = 8) ? "Ptr" : "UInt"
+
+    ; Get the window's dimensions
+    ;   Note: Only the first 16 bytes of the RECTPlus structure are used by the
+    ;   DwmGetWindowAttribute and the GetWindowRect functions.
+    VarSetCapacity(RECTPlus,24,0)
+    DWMRC := DllCall("dwmapi\DwmGetWindowAttribute"
+        ,  PtrType, hWindow                                  ; hwnd
+        , "UInt"  ,  DWMWA_EXTENDED_FRAME_BOUNDS              ; dwAttribute
+        ,  PtrType, &RECTPlus                                ; pvAttribute
+        , "UInt"  ,  16)                                      ; cbAttribute
+
+;   if (DWMRC <> S_OK) {
+    if (DWMRC != 0   ) {
+
+;       if (ErrorLevel in -3, -4) { ; -- Dll or function not found (older than Vista)
+;           VarSetCapacity(RECT, 16, 0)
+;           DllCall("GetWindowRgnBox", PtrType, hWindow, PtrType, &RECT)
+;           DllCall("GetWindowRect",   PtrType, hWindow, PtrType, &RECTPlus)
+;       } else {
+
+;           OutputDebug,
+;           (ltrim join`s
+;                Function: %A_ThisFunc% -
+;                Unknown error calling the "dwmapi\DwmGetWindowAttribute"
+;                function. RC = %DWMRC%,
+;                ErrorLevel = %ErrorLevel%,
+;                A_LastError = %A_LastError%
+;           )
+
+            msgBox('failed')
+
+;           Return False
+;       }
+    }
+
+    ; Populate the output variables
+    Left     := NumGet(RECTPlus, 0,  "Int")
+    Top      := NumGet(RECTPlus, 4,  "Int")
+    Right    := NumGet(RECTPlus, 8,  "Int")
+    Bottom   := NumGet(RECTPlus, 12, "Int")
+    X        := Left
+    Y        := Top
+    Width    := Right - Left
+    Height   := Bottom - Top
+;   OffSet_X := NumGet(RECT,     0,  "Int")
+;   OffSet_Y := NumGet(RECT,     4,  "Int")
+
+    rect := {
+      'x'     : Left         ,
+      'y'     : Top          ,
+      'width' : Width        ,
+      'height': Height       ,
+      'right' : Left + Width ,
+      'bottom': Top  + Height
+    }
+
+    return rect
+
+    ; If DWM is not used (older than Vista), we're done
+;   if (DWMRC <> S_OK) {
+    if (DWMRC != 0   ) {
+        ; Calculate offsets and update output variables
+        NumPut(Offset_X, RECTPlus, 16, "Int")
+        NumPut(Offset_Y, RECTPlus, 20, "Int")
+
+        Return &RECTPlus
+    }
+    ; Collect dimensions via GetWindowRect
+    VarSetCapacity(RECT, 16, 0)
+    DllCall("GetWindowRect", PtrType, hWindow, PtrType, &RECT)
+
+    ; Width = Right - Left
+    GWR_Width  := NumGet(RECT, 8,  "Int") - NumGet(RECT, 0, "Int")
+
+    ; Height = Bottom - Top
+    GWR_Height := NumGet(RECT, 12, "Int") - NumGet(RECT, 4, "Int")
+
+    ; Calculate offsets and update output variables
+    NumPut(Offset_X := (Width - GWR_Width)   // 2, RECTPlus, 16, "Int")
+    NumPut(Offset_Y := (Height - GWR_Height) // 2, RECTPlus, 20, "Int")
+
+    Return &RECTPlus
+}
+
+winRect(title) {
+
+; return WinGetPosEx(WinGetId(title))
+
+  winGetPos(x, y, w, h, title)
+
+  return {
+        'x'      : x,
+        'y'      : y,
+        'width'  : w,
+        'height' : h,
+        'right'  : x+w,
+        'bottom' : y+h
+  }
+}
 
 openOrSwitchToExe(path, exeName) {
 
@@ -31,6 +154,64 @@ openOrSwitchToExe(path, exeName) {
      WinWait    ("ahk_exe " exeName)
      WinActivate("ahk_exe " exeName)
    }
+
+}
+
+drawRect(rect) {
+
+   dc         := dllCall('GetDC', 'uint', 0)
+
+;  ptStruct := "x, y" ; the type definition of the point structure
+;  ptArray  := Struct("ptStruct[1]")
+;  ptArray  := Struct("int x;y")
+ ; ptArray.x := 0 ; x and y usually supplied by prior DLL calls
+ ; ptArray.y := 0 ; the 0,0 logical coords is often returned as top left of the item being drawn to screen
+
+; now call LPtoDP to convert those coords to device coords
+; dllCall("GDI32.dll\LDtoDP", "Ptr", hdc, "Ptr", ptArray[], "Int", 1)
+; MsgBox % ptArray.x "`n" ptArray.y
+
+   redPen     := dllCall("CreatePen"     , "int", PS_SOLID := dc, "int", 5, "uint", 0xff)
+   blackBrush := DllCall("GetStockObject", "int", BLACK_BRUSH:=0x4)
+
+   oldPen     := dllCall("SelectObject", "uint", dc, "uint", redPen    )
+   oldBrush   := dllCall('SelectObject', 'uint', dc, 'uint', blackBrush)
+
+   dllCall("Rectangle", "uint", dc, 
+     "int", rect.x, ; ptArray.x , ; rect.x,
+     "int", rect.y, ; ptArray.y , ; rect.y,
+     "int", rect.right,
+     "int", rect.bottom
+  )
+
+   dllCall("SelectObject", "uint", dc, "uint", oldPen  )
+   dllCall("SelectObject", "uint", dc, "uint", oldBrush)
+
+
+;;   MouseGetPos, x2, y2
+;
+;    
+;    ; Has the mouse moved?
+;;   if (x1 y1) = (x2 y2)
+;;       return
+;    
+;    ; Allow dragging to the left of the click point.
+;    if (x2 < xorigin) {
+;        x1 := x2
+;        x2 := xorigin
+;    } else
+;        x1 := xorigin
+;    
+;    ; Allow dragging above the click point.
+;    if (y2 < yorigin) {
+;        y1 := y2
+;        y2 := yorigin
+;    } else
+;        y1 := yorigin
+;    
+;    Gui, Show, % "NA X" x1 " Y" y1 " W" x2-x1 " H" y2-y1
+;    Gui, +LastFound
+;    DllCall("RedrawWindow", "uint", WinExist(), "uint", 0, "uint", 0, "uint", 5)
 
 }
 
@@ -72,11 +253,41 @@ RAlt & g::
     return
   }
   if (gt = 'citr') {
-   if pid       := processExist('concentr.exe') {
-     msgBox('pid = ' . pid)
-     winActivate("ahk_pid " pid)
+
+   if pid := processExist('CDViewer.exe') { ; CDViewer = citrix ?
+
+;  if pid := processExist('gvim.exe') { ; CDViewer = citrix ?
+     winActivate('ahk_pid ' . pid)
+
+     r := winRect('ahk_pid ' . pid)
+
+  ;  msgBox (r.width . 'x' . r.height . ' @ ' . r.x . ',' . r.y . ', right = ' . r.right . ', bottom = ' . r.bottom)
+
+  ;  drawRect(r)
+
+     coordMode('Mouse', 'Screen')
+;    mouseMove(r.right, r.bottom)
+     mouseClick('left', r.right, r.bottom-4)
+
+;    detectHiddenWindows(true)
    }
     return
+  }
+  if (gt = 'drawr') {
+
+   if pid := processExist('gvim.exe') {
+
+;    r := winRect('ahk_pid ' . pid)
+;    r := winRect('ahk_pid ' . pid)
+     r := WinGetPosEx(winGetId('ahk_pid ' . pid))
+     drawRect(r)
+;    winActivate(('ahk_pid ' . pid))
+
+;    r := { 'x': 10, 'y': 10, 'right': 1900, 'bottom': 1030 }
+     return
+
+   }
+
   }
 ; if (gt = 'snip') {
 ;   openOrSwitchToExe(a_windir . '\System32\', "SnippingTool.exe")
