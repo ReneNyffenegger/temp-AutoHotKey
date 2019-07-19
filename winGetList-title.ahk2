@@ -6,7 +6,7 @@
 ;
 
 setTitleMatchMode('regEx')
-l := winGetList('i)viewer')
+l := winGetList('i)prompt')
 
 for i, hwnd in l {
   msgBox(
