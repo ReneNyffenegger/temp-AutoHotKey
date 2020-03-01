@@ -1,0 +1,31 @@
+g := guiCreate()
+
+txt := g.add('text', 'w200 r1')
+txt.text := 'Hello!'
+
+;
+; This does not work (https://stackoverflow.com/questions/56849007)
+;
+; g.onEvent('close', (*) => function() {
+;   msgBox('Going to exit application')
+;   exitApp()
+; })
+
+;
+;  Any of the following do (https://stackoverflow.com/a/60476070/180275)
+;
+g.onEvent('close', (*) => (
+  msgBox('Going to exit application')
+  exitApp()
+))
+
+; g.onEvent('close', (*) => (
+;   msgBox('Going to exit application'),
+;   exitApp()
+; ))
+
+; g.onEvent('close', (*) => (msgBox('Going to exit application') exitApp()))
+
+; g.onEvent('close', (*) => (msgBox('Going to exit application'), exitApp()))
+
+g.show()
