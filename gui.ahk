@@ -1,0 +1,43 @@
+#requires autoHotkey v2
+
+opts := 
+   '+caption '    . 
+   '+border '     .
+   '+toolWindow ' . ; +toolWindow avoids a taskbar button and an alt-tab menu item
+   '+alwaysOnTop'
+
+g := gui(opts)
+
+g.backColor := 'ffcc88'
+
+g.marginX   :=  30
+g.marginY   :=  18
+
+
+g.addText(''    , 'HWND of g is ' . g.hwnd) ; First parameter is options.
+g.addText(''    , 'Enter some text: ')      
+g.addEdit('vTxt'                     )      ; Note the v that apparently indicates the name to later retrieve the value entered.
+
+b := g.addButton('default', 'Go')
+b.onEvent('click', (*) => clicked(g))
+
+g.show(
+   'x30 ' .
+   'y10 '
+)
+
+; winSetTransColor ('ffcc88', 'gui.ahk2')
+; winSetTransparent(    200 , 'gui.ahk2')
+
+clicked(this) {
+;
+; submit()
+;    save the contents of the
+;    controls into an associative array.
+;
+  ctrls := this.submit()
+
+  msgBox('txt = ' . ctrls.txt)
+  this.destroy()
+
+}

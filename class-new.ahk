@@ -1,0 +1,29 @@
+#requires autoHotkey v2
+
+class cls {
+;
+;    The constructur
+;
+   __new(foo, bar, baz) {
+         this.foo := foo
+         this.bar := bar
+         this.baz := baz
+   }
+
+;
+;    A member procedure / function:
+;
+   msg() {
+
+      msgBox('foo = ' . this.foo . 
+           '`nbar = ' . this.bar . 
+           '`nbaz = ' . this.baz)
+
+   }
+}
+
+obj_1 := cls(   1,     2,       3 )
+obj_2 := cls('one', 'two', 'three')
+ 
+obj_1.msg()
+obj_2.msg()

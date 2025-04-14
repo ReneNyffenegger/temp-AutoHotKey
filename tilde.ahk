@@ -1,0 +1,5 @@
+ #requires autoHotkey v2
+
+ g::msgBox('g was pressed')
+~f::msgBox('f was pressed')
+ q::exitApp()

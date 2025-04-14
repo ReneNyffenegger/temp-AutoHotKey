@@ -1,0 +1,25 @@
+#requires autoHotkey v2
+
+num_1 := 10
+num_2 := 32
+
+if (num_1 + num_2 = 42) {
+   msgBox("num_1 + num_2 = 42")
+}
+else {
+   msgBox("num_1 + num_2 ≠ 42")
+}
+
+
+if (1 = 3) {
+   msgBox("1 = 3 statement 1")
+   msgBox("1 = 3 statement 2")
+}
+else if (1 = 2) {
+   msgBox("1 = 2 statement 1")
+   msgBox("1 = 2 statement 2")
+}
+else {
+   msgBox("else statement 1")
+   msgBox("else statement 2")
+}

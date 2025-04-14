@@ -1,0 +1,18 @@
+#requires autoHotkey v2
+
+;
+;  Detect the simultaneous pressing of two keys (f and j)
+;
+
+f & j:: {
+;
+; Note: pressing f (even if not followed by j) won't
+; put it into the message queue of the current process, it
+; is consumed (or swallowed)
+;
+
+   msgBox('f and j simultaneously')
+
+   exitApp()
+
+}

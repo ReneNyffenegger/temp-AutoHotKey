@@ -1,0 +1,19 @@
+#requires autoHotkey v2
+
+;
+;  Why does this compile?
+;
+;  Found @ https://www.autohotkey.com/boards/viewtopic.php?t=46150 
+;
+
+() => {
+  lambda:
+  dllCall('one')
+  dllCall('two')
+}
+
+() => [
+	DllCall( 1 )
+	DllCall( 2 )
+	DllCall( 2 )
+]

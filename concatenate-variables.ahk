@@ -1,0 +1,7 @@
+#requires autoHotkey v2
+
+var_1 := 'hello"
+var_2 := 'world'
+
+msgBox(var_1   " "   var_2) ; implicit concatenation
+msgBox(var_1 . " " . var_2) ; explicit concatenation

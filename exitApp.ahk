@@ -1,0 +1,12 @@
+#requires autoHotkey v2
+
+loop (10) {
+
+  if a_index = 4 {
+
+    msgBox('a_index reached 4, stopping script')
+    exitApp()
+
+  }
+  msgBox('a_index = ' . a_index . ' - not yet stopping this script')
+}

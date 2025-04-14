@@ -1,0 +1,8 @@
+#requires autoHotkey v2
+
+msgBox (  'a_coordModeToolTip = ' . a_coordModeToolTip .
+        '`na_coordModePixel = '   . a_coordModePixel   .
+        '`na_coordModeMouse = '   . a_coordModeMouse   .
+        '`na_coordModeCaret = '   . a_coordModeCaret   .
+        '`na_coordModeMenu = '    . a_coordModeMenu
+      )

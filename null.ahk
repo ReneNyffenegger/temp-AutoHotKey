@@ -1,0 +1,17 @@
+#requires autoHotkey v2
+
+check_if_null(var) {
+  if(var === null) {
+     msgBox('var = null')
+  }
+  else {
+     msgBox(var . ' != null')
+   }
+}
+
+; var_1 := 42
+var_2 := null
+
+; check_if_null(var_1) ; 42 != null
+check_if_null(var_2) ; var = null
+check_if_null(var_3) ; var = null

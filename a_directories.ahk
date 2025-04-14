@@ -1,0 +1,33 @@
+#requires autoHotkey v2
+
+g := gui()
+
+g.onEvent('close', (*) => exitApp())
+
+lst := g.add(
+   'listView',
+   'r13 w600' , ; 13rows, 600 pixels wide. Add' vLV' to the string to give the control the name LV ?
+  ['readonly', 'Variable|Value']
+
+)
+
+g.show()
+
+lst.add('', 'a_winDir'          , a_winDir         )
+lst.add('', 'a_programFiles'    , a_programFiles   )
+lst.add('', 'a_appData'         , a_appData        )
+lst.add('', 'a_appDataCommon'   , a_appDataCommon  )
+lst.add('', 'a_desktop'         , a_desktop        )
+lst.add('', 'a_desktopCommon'   , a_desktopCommon  )
+lst.add('', 'a_startMenu'       , a_startMenu      )
+lst.add('', 'a_startMenuCommon' , a_startMenuCommon)
+lst.add('', 'a_startUp'         , a_startUp        )
+lst.add('', 'a_startUpCommon'   , a_startUpCommon  )
+lst.add('', 'a_programs'        , a_programs       )
+lst.add('', 'a_programsCommon'  , a_programsCommon )
+lst.add('', 'a_myDocuments'     , a_myDocuments    )
+
+;
+; Autofit column header:
+;
+lst.modifyCol

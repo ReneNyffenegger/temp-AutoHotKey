@@ -1,0 +1,9 @@
+#requires autoHotkey v2
+
+coordMode('mouse', 'window')
+mouseGetPos(&mouseX, &mouseY)
+msgBox('mouse position relative to active window:`nX: ' . mouseX . ', Y: ' . mouseY)
+
+coordMode('mouse', 'screen')
+mouseGetPos(&mouseX, &mouseY)
+msgBox('mouse position relative to screen:`nX: ' . mouseX . ', Y: ' . mouseY)

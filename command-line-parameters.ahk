@@ -1,0 +1,7 @@
+#requires autoHotkey v2
+
+msgBox("count of parameters: " a_args.length)
+
+for paramNo, paramValue in a_args {
+    msgBox("Parameter " paramNo " is " paramValue)
+}

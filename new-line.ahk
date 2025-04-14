@@ -1,0 +1,3 @@
+#requires autoHotkey v2
+
+msgBox('line one`nline two`nAsc(``n) = ' . ord('`n') . '`nord(``r) = ' . ord('`r'))
